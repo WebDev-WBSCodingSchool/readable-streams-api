@@ -9,7 +9,7 @@ class MediaStream {
 
   async *[Symbol.asyncIterator]() {
     for await (const chunk of this.filePath) {
-      await new Promise(resolve => setTimeout(resolve, 50));
+      await new Promise(resolve => setTimeout(resolve, 20));
       yield chunk;
     }
   }

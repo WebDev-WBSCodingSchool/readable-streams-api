@@ -1,4 +1,3 @@
-import { createReadStream } from 'fs';
 import { readFile } from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -20,7 +19,8 @@ app.get('/video', async (req, res) => {
   res.writeHead(200, {
     Connection: 'keep-alive',
     'Cache-Control': 'no-cache',
-    'Content-Type': 'video/mp4'
+    'Content-Type': 'video/mp4',
+    'Transfer-Encoding': 'chunked'
   });
   for await (const chunk of videoStream) {
     res.write(chunk);
@@ -34,7 +34,8 @@ app.get('/audio', async (req, res) => {
   res.writeHead(200, {
     Connection: 'keep-alive',
     'Cache-Control': 'no-cache',
-    'Content-Type': 'audio/mpeg'
+    'Content-Type': 'audio/mpeg',
+    'Transfer-Encoding': 'chunked'
   });
   for await (const chunk of audioStream) {
     res.write(chunk);
